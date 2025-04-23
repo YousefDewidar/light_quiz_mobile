@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:light_quiz/core/helper/api_service.dart';
 import 'package:light_quiz/features/auth/domain/repo/auth_repo.dart';
@@ -19,4 +20,10 @@ Future<void> setupLocator() async {
 
   final sharedPreferences = await SharedPreferences.getInstance();
   getIt.registerSingleton<SharedPreferences>(sharedPreferences);
+
+  // Secure Storage
+  AndroidOptions getAndroidOptions() =>
+      const AndroidOptions(encryptedSharedPreferences: true);
+  final storage = FlutterSecureStorage(aOptions: getAndroidOptions());
+  getIt.registerSingleton<FlutterSecureStorage>(storage);
 }

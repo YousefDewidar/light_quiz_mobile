@@ -40,6 +40,13 @@ class QuizRepoImpl implements QuizRepo {
             ),
           );
         }
+        if (e.response?.statusCode == 403) {
+          return Left(
+            ServerFailure(
+              errMessage: "You are not in the group",
+            ),
+          );
+        }
 
         return Left(ServerFailure.fromDioError(e));
       }
