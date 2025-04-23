@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+import 'package:light_quiz/features/quiz/data/models/result.dart';
+
+class ResultCard extends StatelessWidget {
+  const ResultCard({super.key, required this.isPassed, required this.result});
+
+  final bool isPassed;
+  final Result result;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withValues(alpha: 0.1),
+            blurRadius: 8,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 28,
+            backgroundColor: isPassed ? Colors.green[100] : Colors.red[100],
+            child: Icon(
+              isPassed ? Icons.check_circle : Icons.error_outline,
+              size: 30,
+              color: isPassed ? Colors.green : Colors.red,
+            ),
+          ),
+          SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  result.quizTitle,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  "Number of Questions: ${result.totalQuestions}",
+                  style: TextStyle(color: Colors.grey[600]),
+                ),
+              ],
+            ),
+          ),
+          Text(
+            "${result.grade}/${result.possiblePoints}",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: isPassed ? Colors.green : Colors.red,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
