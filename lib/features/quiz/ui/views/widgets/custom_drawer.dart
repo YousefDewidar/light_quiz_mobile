@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:light_quiz/core/helper/di.dart';
 import 'package:light_quiz/core/helper/user_data.dart';
 import 'package:light_quiz/core/utils/app_colors.dart';
@@ -22,12 +22,10 @@ class CustomDrawer extends StatelessWidget {
             ),
             accountEmail: Text(getUserData()?.email ?? ''),
             currentAccountPicture: CircleAvatar(
-              child: CachedNetworkImage(
-                imageUrl: getUserData()!.avatarUrl,
-                placeholder:
-                    (context, url) =>
-                        CircularProgressIndicator(color: Colors.orange),
-                errorWidget: (context, url, error) => Icon(Icons.error),
+              backgroundColor: Colors.white,
+              child: Text(
+                getUserData()?.name[0].toUpperCase() ?? 'U',
+                style: TextStyle(fontSize: 24, color: AppColors.primaryColor),
               ),
             ),
           ),
@@ -42,10 +40,12 @@ class CustomDrawer extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            onTap: () {
+            onTap: () async {
+              final secure = getIt.get<FlutterSecureStorage>();
               final pref = getIt.get<SharedPreferences>();
-              pref.remove('token');
+              await secure.delete(key: 'token');
               pref.remove('user');
+              // ignore: use_build_context_synchronously
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => LoginView()),
                 (route) => false,

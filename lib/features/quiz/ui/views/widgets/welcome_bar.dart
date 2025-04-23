@@ -8,7 +8,7 @@ class WelcomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
         children: [
           Builder(
@@ -17,7 +17,18 @@ class WelcomBar extends StatelessWidget {
                 onTap: () {
                   Scaffold.of(context).openDrawer();
                 },
-                child: Image.asset('assets/logo.png', width: 50, height: 50),
+                child: CircleAvatar(
+                  radius: 22,
+                  backgroundColor: const Color.fromARGB(90, 223, 226, 226),
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: Image.asset(
+                      'assets/logo_c.png',
+                      width: 50,
+                      height: 50,
+                    ),
+                  ),
+                ),
               );
             },
           ),

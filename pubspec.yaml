@@ -19,7 +19,11 @@ dependencies:
   lottie:
   icons_launcher:
   cached_network_image: ^3.4.1
-
+  animated_splash_screen:
+  page_transition:
+  firebase_core:
+  firebase_messaging:
+  flutter_secure_storage: ^9.2.4
   flutter:
     sdk: flutter
 
@@ -46,7 +50,7 @@ flutter:
           weight: 700
 
 icons_launcher:
-  image_path: "assets/logo.png"
+  image_path: "assets/logo_c.png"
   platforms:
     android:
       enable: true

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "948166851538",
+    "project_id": "light-quiz-2f9ef",
+    "storage_bucket": "light-quiz-2f9ef.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948166851538:android:e907fad4eae8731862e60b",
+        "android_client_info": {
+          "package_name": "com.example.light_quiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATVPNjBCgm-cku-C2I_0iMoAqcru2TxOk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

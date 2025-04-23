@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:light_quiz/core/helper/di.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
   final Dio _dio;
@@ -10,19 +10,22 @@ class ApiService {
   static const String baseUrl = 'https://api.theknight.tech';
 
   Future<Response> getWithToken(String endPoint) async {
+    final token = await getToken();
+
     final response = await _dio.get(
       "$baseUrl$endPoint",
-      options: Options(headers: {"Authorization": "Bearer ${getToken()}"}),
+      options: Options(headers: {"Authorization": "Bearer $token"}),
     );
 
     return response;
   }
 
   Future<Response> postWithToken(String endPoint, dynamic data) async {
+    final token = await getToken();
     final response = await _dio.post(
       "$baseUrl$endPoint",
       data: data,
-      options: Options(headers: {"Authorization": "Bearer ${getToken()}"}),
+      options: Options(headers: {"Authorization": "Bearer $token"}),
     );
 
     return response;
@@ -38,7 +41,7 @@ class ApiService {
     return response;
   }
 
-  String? getToken() {
-    return getIt.get<SharedPreferences>().getString("token");
+  Future<String?> getToken() async {
+    return await getIt.get<FlutterSecureStorage>().read(key: "token");
   }
 }
