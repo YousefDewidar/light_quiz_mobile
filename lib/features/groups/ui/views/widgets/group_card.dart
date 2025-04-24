@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:light_quiz/core/utils/app_colors.dart';
 import 'package:light_quiz/core/widgets/custom_button.dart';
 import 'package:light_quiz/features/groups/data/models/group_model.dart';
-import 'package:light_quiz/features/groups/ui/managers/group_cubit.dart';
+import 'package:light_quiz/features/groups/ui/views/widgets/leave_group_dailog.dart';
 
 class GroupCard extends StatelessWidget {
   const GroupCard({super.key, required this.group});
@@ -77,8 +76,11 @@ class GroupCard extends StatelessWidget {
                 child: CustomButton(
                   title: "Leave Group",
                   onPressed: () {
-                    context.read<GroupCubit>().leaveGroup(
-                      shortCode: group.shortCode,
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return LeaveGroupDialog(group: group);
+                      },
                     );
                   },
                   color: Colors.redAccent,

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:light_quiz/core/helper/di.dart';
 import 'package:light_quiz/core/notifications/fcm_helper.dart';
+import 'package:light_quiz/core/notifications/local_notification.dart';
 import 'package:light_quiz/core/utils/app_colors.dart';
 import 'package:light_quiz/core/widgets/layout_view.dart';
 import 'package:light_quiz/features/auth/ui/views/login_view.dart';
@@ -24,6 +25,7 @@ void main() async {
   );
   // getIt.get<SharedPreferences>().clear();
   FcmHelper().initNotification();
+  LocalNotificationService.initNotification();
   runApp(StudentQuizApp(hasUser: hasUser));
 }
 
