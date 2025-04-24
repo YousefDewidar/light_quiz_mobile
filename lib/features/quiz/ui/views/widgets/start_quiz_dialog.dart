@@ -19,7 +19,6 @@ class StartQuizDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-      backgroundColor: Colors.white,
       child: Container(
         padding: const EdgeInsets.all(24),
         width: 340,
@@ -58,7 +57,12 @@ class StartQuizDialog extends StatelessWidget {
             const SizedBox(height: 4),
 
             // Subtitle
-            const Text('from yousef', style: TextStyle(color: Colors.grey)),
+            Text(
+              'from yousef',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyLarge!.color!,
+              ),
+            ),
 
             const SizedBox(height: 24),
 
@@ -68,6 +72,7 @@ class StartQuizDialog extends StatelessWidget {
               '${metaData.timeAllowed} minutes',
               Colors.blue.withOpacity(0.08),
               Colors.blue,
+              context,
             ),
             const SizedBox(height: 10),
             _infoBox(
@@ -75,6 +80,7 @@ class StartQuizDialog extends StatelessWidget {
               '${metaData.numberOfQuestions}',
               Colors.purple.withOpacity(0.08),
               Colors.purple,
+              context,
             ),
             const SizedBox(height: 10),
             _infoBox(
@@ -82,6 +88,7 @@ class StartQuizDialog extends StatelessWidget {
               '${metaData.startsAt.day}-${metaData.startsAt.month}-${metaData.startsAt.year} | ${metaData.startsAt.hour}:${metaData.startsAt.minute}',
               Colors.blue.withOpacity(0.08),
               Colors.blue,
+              context,
             ),
 
             const SizedBox(height: 24),
@@ -95,7 +102,7 @@ class StartQuizDialog extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    color: Colors.grey.shade300,
+                    color: const Color.fromARGB(255, 183, 183, 183),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -124,7 +131,13 @@ class StartQuizDialog extends StatelessWidget {
     );
   }
 
-  Widget _infoBox(String label, String value, Color bgColor, Color labelColor) {
+  Widget _infoBox(
+    String label,
+    String value,
+    Color bgColor,
+    Color labelColor,
+    context,
+  ) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -143,9 +156,9 @@ class StartQuizDialog extends StatelessWidget {
           children: [
             TextSpan(
               text: value,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.normal,
-                color: Colors.black87,
+                color: Theme.of(context).textTheme.bodySmall!.color!,
                 fontSize: 14,
               ),
             ),

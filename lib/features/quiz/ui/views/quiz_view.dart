@@ -180,7 +180,12 @@ class _QuizViewState extends State<QuizView> {
       builder:
           (context) => AlertDialog(
             title: const Text('Exit Quiz'),
-            content: const Text('Are you sure you want to exit the quiz?'),
+            content: Text(
+              'Are you sure you want to exit the quiz?',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyLarge!.color!,
+              ),
+            ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),

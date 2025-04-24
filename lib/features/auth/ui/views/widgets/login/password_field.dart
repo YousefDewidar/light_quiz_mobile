@@ -50,7 +50,7 @@ class _PasswordFieldState extends State<PasswordField> {
           ),
         ),
         filled: true,
-        fillColor: const Color.fromARGB(255, 245, 249, 247),
+        fillColor: Theme.of(context).textTheme.bodyMedium!.color,
         border: customBorder(),
         enabledBorder: customBorder(),
         focusedBorder: customBorder(),
@@ -59,9 +59,12 @@ class _PasswordFieldState extends State<PasswordField> {
   }
 
   OutlineInputBorder customBorder() {
-    return const OutlineInputBorder(
+    return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(5)),
-      borderSide: BorderSide(width: 1.3, color: Color(0xffE6E9EA)),
+      borderSide: BorderSide(
+        width: 1.3,
+        color: Theme.of(context).textTheme.bodyMedium!.color!,
+      ),
     );
   }
 }

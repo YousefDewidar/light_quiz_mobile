@@ -9,7 +9,6 @@ class QuizResultDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-      backgroundColor: Colors.white,
       child: Container(
         padding: const EdgeInsets.all(24),
         width: 340,

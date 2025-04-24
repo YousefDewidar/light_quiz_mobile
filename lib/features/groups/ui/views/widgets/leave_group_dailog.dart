@@ -12,7 +12,6 @@ class LeaveGroupDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: const Color.fromARGB(255, 243, 243, 243),
       child: Container(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -33,18 +32,21 @@ class LeaveGroupDialog extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               "Leave Group",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Theme.of(context).textTheme.bodySmall!.color,
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               "Are you sure you want to leave this group?",
               textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyLarge!.color,
+              ),
             ),
             const SizedBox(height: 24),
             Row(

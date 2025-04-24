@@ -9,10 +9,10 @@ AppBar customAppBar(BuildContext context, String title) {
     leadingWidth: 80,
     leading: IconButton(
       onPressed: () => Navigator.pop(context),
-      icon: const Icon(
+      icon: Icon(
         size: 16,
         Icons.arrow_back_ios_new_rounded,
-        color: Color(0xff0C0D0D),
+        color: Theme.of(context).textTheme.bodySmall!.color,
       ),
     ),
   );

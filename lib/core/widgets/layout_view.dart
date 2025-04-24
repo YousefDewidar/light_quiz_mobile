@@ -51,7 +51,7 @@ class _LayoutViewState extends State<LayoutView> {
         drawer: CustomDrawer(),
         bottomNavigationBar: SizedBox(
           child: WaterDropNavBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.transparent,
             waterDropColor: const Color.fromARGB(255, 12, 131, 62),
             onItemSelected: (index) {
               setState(() {

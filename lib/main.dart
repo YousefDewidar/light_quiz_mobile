@@ -5,7 +5,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:light_quiz/core/helper/di.dart';
 import 'package:light_quiz/core/notifications/fcm_helper.dart';
 import 'package:light_quiz/core/notifications/local_notification.dart';
-import 'package:light_quiz/core/utils/app_colors.dart';
+import 'package:light_quiz/core/themes/theme_cubit.dart';
+import 'package:light_quiz/core/themes/theme_data.dart';
+import 'package:light_quiz/core/themes/theme_state.dart';
 import 'package:light_quiz/core/widgets/layout_view.dart';
 import 'package:light_quiz/features/auth/ui/views/login_view.dart';
 import 'package:light_quiz/features/groups/data/repo/group_repo.dart';
@@ -37,25 +39,27 @@ class StudentQuizApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => ThemeCubit()..getTheme()),
         BlocProvider(create: (context) => QuizCubit(getIt.get<QuizRepo>())),
         BlocProvider(
           create:
               (context) => GroupCubit(getIt.get<GroupRepo>())..getAllGroups(),
         ),
       ],
-      child: MaterialApp(
-        navigatorKey: navigatorKey,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: 'cairo',
-          scaffoldBackgroundColor: AppColors.productColor,
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
-          useMaterial3: true,
-        ),
-        home:
-            hasUser
-                ? SplashView(nextView: LayoutView())
-                : SplashView(nextView: LoginView()),
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            navigatorKey: navigatorKey,
+            debugShowCheckedModeBanner: false,
+            themeMode: state is ThemeChanged ? state.theme : null,
+            theme: CustomThemeData.lightData(),
+            darkTheme: CustomThemeData.darkData(),
+            home:
+                hasUser
+                    ? SplashView(nextView: LayoutView())
+                    : SplashView(nextView: LoginView()),
+          );
+        },
       ),
     );
   }

@@ -26,11 +26,14 @@ class ResultsView extends StatelessWidget {
 
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  color: Colors.white,
+                  color: Theme.of(context).textTheme.bodyMedium!.color,
                   width: double.infinity,
                   child: Text(
                     "Your Results",
-                    style: TextStyle(fontSize: 19),
+                    style: TextStyle(
+                      fontSize: 19,
+                      color: Theme.of(context).textTheme.bodySmall!.color,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ),

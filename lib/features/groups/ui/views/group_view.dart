@@ -40,11 +40,14 @@ class GroupsView extends StatelessWidget {
             SizedBox(height: 10),
             Container(
               padding: EdgeInsets.symmetric(vertical: 16),
-              color: Colors.white,
+              color: Theme.of(context).textTheme.bodyMedium!.color,
               width: double.infinity,
               child: Text(
                 "Your Groups",
-                style: TextStyle(fontSize: 19),
+                style: TextStyle(
+                  fontSize: 19,
+                  color: Theme.of(context).textTheme.bodySmall!.color,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),

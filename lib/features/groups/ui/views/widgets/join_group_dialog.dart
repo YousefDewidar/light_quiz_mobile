@@ -14,7 +14,7 @@ class JoinGroupDialog extends StatelessWidget {
     TextEditingController groupCon = TextEditingController();
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-      backgroundColor: const Color.fromARGB(255, 243, 243, 243),
+      elevation: 3,
       child: Container(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -42,10 +42,10 @@ class JoinGroupDialog extends StatelessWidget {
             // Title
             Text(
               "Join New Group",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Theme.of(context).textTheme.bodySmall!.color,
               ),
             ),
 

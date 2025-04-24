@@ -12,7 +12,7 @@ class SplashView extends StatelessWidget {
       // backgroundColor: Colors.transparent,
       body: Center(
         child: AnimatedSplashScreen(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           splash: Image.asset(
             "assets/logo_c.png",
             width: MediaQuery.of(context).size.width - 80,

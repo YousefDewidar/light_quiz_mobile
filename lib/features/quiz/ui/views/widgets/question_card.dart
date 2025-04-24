@@ -18,8 +18,11 @@ class QuestionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shadowColor: const Color.fromARGB(255, 247, 247, 247),
-      color: const Color.fromARGB(255, 252, 254, 255),
+      shadowColor:
+          Theme.of(context).brightness == Brightness.dark
+              ? Colors.black
+              : const Color.fromARGB(255, 247, 247, 247),
+      color: Theme.of(context).textTheme.bodyMedium!.color,
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 1.5,
@@ -33,9 +36,10 @@ class QuestionCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Q${qIndex + 1}: ${question.text}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      color: Theme.of(context).textTheme.bodySmall!.color,
                     ),
                   ),
                 ),
@@ -55,10 +59,20 @@ class QuestionCard extends StatelessWidget {
               )
             else if (question.typeId == 3)
               TextField(
-                decoration: const InputDecoration(
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodySmall!.color,
+                ),
+                decoration: InputDecoration(
                   hintText: 'Enter Your answer here...',
                   border: OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColors.primaryColor,
+                      width: 1.3,
+                    ),
+                  ),
                 ),
+
                 maxLines: 3,
                 onChanged: (value) {
                   answers[qIndex].answerText = value;

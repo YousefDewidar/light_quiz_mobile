@@ -70,7 +70,10 @@ class _EnterExamViewState extends State<EnterExamView> {
                 Text(
                   'Let\'s test your knowledge today! 🎓\nExam grading powered by AI',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Theme.of(context).textTheme.bodyLarge!.color,
+                  ),
                 ),
 
                 const SizedBox(height: 30),

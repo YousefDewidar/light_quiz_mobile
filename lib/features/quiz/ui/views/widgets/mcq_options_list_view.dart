@@ -40,6 +40,7 @@ class _McqOptionsListViewState extends State<McqOptionsListView> {
           child: RadioListTile<String>(
             title: Text(opt.optionText),
             value: opt.optionLetter,
+            activeColor: AppColors.secondaryColor,
             groupValue: selectedOption,
             onChanged: (value) {
               setState(() {

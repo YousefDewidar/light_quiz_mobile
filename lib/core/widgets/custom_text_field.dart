@@ -34,18 +34,21 @@ class CustomTextField extends StatelessWidget {
         hintStyle: TextStyles.bold13.copyWith(color: AppColors.greyColor),
         prefixIcon: preIcon,
         filled: true,
-        fillColor: const Color.fromARGB(255, 245, 249, 247),
-        border: customBorder(),
-        enabledBorder: customBorder(),
-        focusedBorder: customBorder(),
+        fillColor: Theme.of(context).textTheme.bodyMedium!.color,
+        border: customBorder(context),
+        enabledBorder: customBorder(context),
+        focusedBorder: customBorder(context),
       ),
     );
   }
 
-  OutlineInputBorder customBorder() {
-    return const OutlineInputBorder(
+  OutlineInputBorder customBorder(context) {
+    return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(5)),
-      borderSide: BorderSide(width: 1.3, color: Color(0xffE6E9EA)),
+      borderSide: BorderSide(
+        width: 1.3,
+        color: Theme.of(context).textTheme.bodyMedium!.color!,
+      ),
     );
   }
 }

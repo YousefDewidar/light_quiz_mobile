@@ -39,14 +39,19 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Image.asset("assets/student.png", height: 200),
+                Image.asset("assets/student_c.png", height: 200),
                 const SizedBox(height: 30),
-                Text("Light Quiz", style: TextStyles.bold23),
+                Text(
+                  "Light Quiz",
+                  style: TextStyles.bold23.copyWith(
+                    color: Theme.of(context).textTheme.bodySmall!.color,
+                  ),
+                ),
                 Text(
                   "Your AI-Powered Quiz Experience",
                   style: TextStyles.medium15.copyWith(
                     fontSize: 16,
-                    color: Colors.grey,
+                    color: Theme.of(context).textTheme.bodyLarge!.color,
                   ),
                 ),
                 const SizedBox(height: 20),

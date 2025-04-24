@@ -13,11 +13,14 @@ class ResultCard extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 16),
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).textTheme.bodyMedium!.color,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.1),
+            color:
+                Theme.of(context).brightness == Brightness.dark
+                    ? const Color.fromARGB(255, 7, 7, 7)
+                    : Colors.grey.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: Offset(0, 4),
           ),
@@ -44,13 +47,15 @@ class ResultCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: Theme.of(context).textTheme.bodySmall!.color,
                   ),
                 ),
                 SizedBox(height: 4),
                 Text(
                   "Number of Questions: ${result.totalQuestions}",
-                  style: TextStyle(color: Colors.grey[600]),
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge!.color,
+                  ),
                 ),
               ],
             ),

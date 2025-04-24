@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:light_quiz/core/helper/user_data.dart';
+import 'package:light_quiz/core/themes/theme_cubit.dart';
 import 'package:light_quiz/core/utils/app_colors.dart';
+import 'package:light_quiz/main.dart';
 
 class WelcomBar extends StatelessWidget {
   const WelcomBar({super.key});
@@ -38,14 +41,16 @@ class WelcomBar extends StatelessWidget {
             children: [
               Text(
                 'Welcome,',
-                style: TextStyle(fontSize: 18, color: Colors.black),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall!.copyWith(fontSize: 18),
               ),
               Text(
                 '${getUserData()?.name} 👋',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Theme.of(context).textTheme.bodySmall!.color,
                 ),
               ),
             ],
@@ -57,7 +62,9 @@ class WelcomBar extends StatelessWidget {
                 AppColors.lightPrimaryColor.withValues(alpha: 0.1),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              context.read<ThemeCubit>().changeTheme(context);
+            },
             icon: Icon(Icons.notifications_none, color: AppColors.primaryColor),
           ),
         ],
