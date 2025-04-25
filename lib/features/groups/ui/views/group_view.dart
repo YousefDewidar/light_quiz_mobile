@@ -15,6 +15,7 @@ class GroupsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<GroupCubit>().getAllGroups();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primaryColor,
@@ -28,80 +29,72 @@ class GroupsView extends StatelessWidget {
         },
         child: Icon(Icons.group_add, color: Colors.white),
       ),
-
-      body: RefreshIndicator(
-        color: Colors.orange,
-        onRefresh: () {
-          context.read<GroupCubit>().getAllGroups();
-          return Future.value();
-        },
-        child: Column(
-          children: [
-            SizedBox(height: 10),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              color: Theme.of(context).textTheme.bodyMedium!.color,
-              width: double.infinity,
-              child: Text(
-                "Your Groups",
-                style: TextStyle(
-                  fontSize: 19,
-                  color: Theme.of(context).textTheme.bodySmall!.color,
-                ),
-                textAlign: TextAlign.center,
+      body: Column(
+        children: [
+          SizedBox(height: 10),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            color: Theme.of(context).textTheme.bodyMedium!.color,
+            width: double.infinity,
+            child: Text(
+              "Your Groups",
+              style: TextStyle(
+                fontSize: 19,
+                color: Theme.of(context).textTheme.bodySmall!.color,
               ),
+              textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10),
-            BlocConsumer<GroupCubit, GroupState>(
-              listener: (context, state) {
-                if (state is JoinGroupFailure) {
-                  showNotification(context, state.errMessage, NotiType.error);
-                }
-                if (state is JoinGroupSuccess) {
-                  showNotification(
-                    context,
-                    "Joined Group Successfully",
-                    NotiType.success,
-                  );
-                }
-                if (state is LeaveGroupSuccess) {
-                  showNotification(
-                    context,
-                    "Left Group Successfully",
-                    NotiType.success,
-                  );
-                }
-              },
-              builder: (context, state) {
-                if (state is GroupLoading) {
-                  return Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Lottie.asset('assets/ai_loading.json'),
-                    ),
-                  );
-                } else if (state is GroupSuccess) {
-                  final groups = state.groups;
-                  return Expanded(
-                    child: ListView.builder(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      itemCount: groups.length,
-                      itemBuilder: (context, index) {
-                        final result = groups[index];
-                        return GroupCard(group: result);
-                      },
-                    ),
-                  );
-                } else if (state is GroupFail) {
-                  return Center(child: Text(state.errMessage));
-                } else {
-                  log(state.toString());
-                  return Center(child: Text("data"));
-                }
-              },
-            ),
-          ],
-        ),
+          ),
+          SizedBox(height: 10),
+          BlocConsumer<GroupCubit, GroupState>(
+            listener: (context, state) {
+              if (state is JoinGroupFailure) {
+                showNotification(context, state.errMessage, NotiType.error);
+              }
+              if (state is JoinGroupSuccess) {
+                showNotification(
+                  context,
+                  "Joined Group Successfully",
+                  NotiType.success,
+                );
+              }
+              if (state is LeaveGroupSuccess) {
+                showNotification(
+                  context,
+                  "Left Group Successfully",
+                  NotiType.success,
+                );
+              }
+            },
+            builder: (context, state) {
+              if (state is GroupLoading) {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Lottie.asset('assets/ai_loading.json'),
+                  ),
+                );
+              } else if (state is GroupSuccess) {
+                final groups = state.groups;
+                return Expanded(
+                  child: ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    itemCount: groups.length,
+                    itemBuilder: (context, index) {
+                      final result = groups[index];
+                      return GroupCard(group: result);
+                    },
+                  ),
+                );
+              } else if (state is GroupFail) {
+                return Center(child: Text(state.errMessage));
+              } else {
+                log(state.toString());
+                return Center(child: Text("data"));
+              }
+            },
+          ),
+        ],
       ),
     );
   }

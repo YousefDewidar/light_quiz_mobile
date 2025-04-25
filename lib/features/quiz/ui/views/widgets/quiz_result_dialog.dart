@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:light_quiz/features/quiz/data/models/result.dart';
+import 'package:light_quiz/features/quiz/ui/cubits/quiz_cubit.dart';
+import 'package:light_quiz/features/quiz/ui/cubits/quiz_state.dart';
+import 'package:light_quiz/features/quiz/ui/views/show_response_view.dart';
 
 class QuizResultDialog extends StatelessWidget {
   final Result result;
-  const QuizResultDialog({super.key, required this.result});
+  final String shortCode;
+  const QuizResultDialog({
+    super.key,
+    required this.result,
+    required this.shortCode,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +55,9 @@ class QuizResultDialog extends StatelessWidget {
             // Subtitle (Quiz title)
             Text(
               result.quizTitle,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 20,
-                color: Colors.black,
+                color: Theme.of(context).textTheme.bodySmall!.color,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -67,6 +76,41 @@ class QuizResultDialog extends StatelessWidget {
 
             const SizedBox(height: 24),
 
+            // Button to view answers
+            SizedBox(
+              width: double.infinity,
+              child: BlocListener<QuizCubit, QuizState>(
+                listener: (context, state) {
+                  if (state is ShowResponseSuccess) {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder:
+                            (context) => ShowResponseView(quiz: state.results),
+                      ),
+                    );
+                  }
+                },
+                child: ElevatedButton(
+                  onPressed: () async {
+                    await context.read<QuizCubit>().getResposes(
+                      shortCode: shortCode,
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    backgroundColor: Colors.blueAccent,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text("Show Responses"),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+
             // Close Button
             SizedBox(
               width: double.infinity,
@@ -74,7 +118,7 @@ class QuizResultDialog extends StatelessWidget {
                 onPressed: () => Navigator.of(context).pop(),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14),
-                  backgroundColor: Colors.grey.shade300,
+                  backgroundColor: const Color.fromARGB(255, 232, 200, 200),
                   foregroundColor: Colors.black87,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),

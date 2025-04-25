@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:light_quiz/core/helper/api_service.dart';
 import 'package:light_quiz/core/helper/failure.dart';
 import 'package:light_quiz/core/helper/user_data.dart';
+import 'package:light_quiz/features/quiz/data/models/correct_quiz_model.dart';
 import 'package:light_quiz/features/quiz/data/models/quiz.dart';
 import 'package:light_quiz/features/quiz/data/models/quiz_meta_data.dart';
 import 'package:light_quiz/features/quiz/data/models/result.dart';
@@ -41,11 +40,7 @@ class QuizRepoImpl implements QuizRepo {
           );
         }
         if (e.response?.statusCode == 403) {
-          return Left(
-            ServerFailure(
-              errMessage: "You are not in the group",
-            ),
-          );
+          return Left(ServerFailure(errMessage: "You are not in the group"));
         }
 
         return Left(ServerFailure.fromDioError(e));
@@ -80,7 +75,6 @@ class QuizRepoImpl implements QuizRepo {
       );
       return Right(null);
     } catch (e) {
-      log(e.toString());
       return Left(ServerFailure(errMessage: "There is an error"));
     }
   }
@@ -89,8 +83,26 @@ class QuizRepoImpl implements QuizRepo {
   Future<Either<Failure, Result>> getResults({required String quizId}) async {
     try {
       final res = await apiService.getWithToken("/api/student/result/$quizId");
-      log(res.data.toString());
       return Right(Result.fromMap(res.data));
+    } catch (e) {
+      if (e is DioException) {
+        if (e.response?.statusCode == 404) {
+          return Left(ServerFailure(errMessage: "There is no result"));
+        }
+        return Left(ServerFailure.fromDioError(e));
+      }
+
+      return Left(ServerFailure(errMessage: "There is an error"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CorrectedQuizModel>> getResponses({
+    required String shortCode,
+  }) async {
+    try {
+      final res = await apiService.getWithToken("/api/quiz/review/$shortCode");
+      return Right(CorrectedQuizModel.fromJson(res.data));
     } catch (e) {
       if (e is DioException) {
         if (e.response?.statusCode == 404) {

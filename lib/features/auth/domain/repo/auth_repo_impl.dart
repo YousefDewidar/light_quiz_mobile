@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -88,6 +86,5 @@ class AuthRepoImpl implements AuthRepo {
         {},
       );
     }
-    log(fcmToken ?? "null");
   }
 }

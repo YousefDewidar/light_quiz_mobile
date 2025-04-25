@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:light_quiz/core/helper/user_data.dart';
 import 'package:light_quiz/core/themes/theme_cubit.dart';
 import 'package:light_quiz/core/utils/app_colors.dart';
-import 'package:light_quiz/main.dart';
 
 class WelcomBar extends StatelessWidget {
   const WelcomBar({super.key});
@@ -65,7 +64,12 @@ class WelcomBar extends StatelessWidget {
             onPressed: () {
               context.read<ThemeCubit>().changeTheme(context);
             },
-            icon: Icon(Icons.notifications_none, color: AppColors.primaryColor),
+            icon: Icon(
+              Theme.of(context).brightness == Brightness.light
+                  ? Icons.dark_mode_outlined
+                  : Icons.light_mode_outlined,
+              color: AppColors.lightPrimaryColor,
+            ),
           ),
         ],
       ),

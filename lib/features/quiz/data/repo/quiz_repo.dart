@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:light_quiz/core/helper/failure.dart';
+import 'package:light_quiz/features/quiz/data/models/correct_quiz_model.dart';
 import 'package:light_quiz/features/quiz/data/models/quiz.dart';
 import 'package:light_quiz/features/quiz/data/models/quiz_meta_data.dart';
 import 'package:light_quiz/features/quiz/data/models/result.dart';
@@ -19,4 +20,6 @@ abstract class QuizRepo {
   Future<Either<Failure, Result>> getResults({required String quizId});
 
   Future<Either<Failure, List<Result>>> getAllResults();
+
+  Future<Either<Failure, CorrectedQuizModel>> getResponses({required String shortCode});
 }

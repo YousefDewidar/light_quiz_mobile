@@ -48,15 +48,16 @@ class ServerFailure extends Failure {
 
   factory ServerFailure.fromBadResponse(Response response) {
     if ([400, 401, 403].contains(response.statusCode)) {
-      try {
-        return ServerFailure(
-          errMessage: response.data['errors']['Credentials'][0],
-        );
-      } catch (ee) {
-        return ServerFailure(
-          errMessage: response.data['errors']["Password"][0],
-        );
-      }
+      return ServerFailure(errMessage: "There is an Error.");
+      // try {
+      //   return ServerFailure(
+      //     errMessage: response.data['errors']['Credentials'][0],
+      //   );
+      // } catch (ee) {
+      //   return ServerFailure(
+      //     errMessage: response.data['errors']["Password"][0],
+      //   );
+      // }
     } else if (response.statusCode == 500) {
       return ServerFailure(
         errMessage: 'The is a problem in server, please try later',

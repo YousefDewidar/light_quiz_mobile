@@ -114,7 +114,10 @@ class _EnterExamViewState extends State<EnterExamView> {
                       showDialog(
                         context: context,
                         builder: (ctx) {
-                          return QuizResultDialog(result: state.result);
+                          return QuizResultDialog(
+                            result: state.result,
+                            shortCode: _controller.text,
+                          );
                         },
                       );
                     }

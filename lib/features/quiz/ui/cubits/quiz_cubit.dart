@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:light_quiz/features/quiz/data/models/submit_quiz_model.dart';
 import 'package:light_quiz/features/quiz/data/repo/quiz_repo.dart';
@@ -30,8 +28,6 @@ class QuizCubit extends Cubit<QuizState> {
   }
 
   Future<void> submitAnswers({required SubmitQuizModel submitQuizModel}) async {
-    log("submit Answers");
-
     emit(QuizSubmitLoading());
 
     final res = await quizRepo.submitQuiz(submitQuizModel: submitQuizModel);
@@ -50,13 +46,25 @@ class QuizCubit extends Cubit<QuizState> {
     final result = await quizRepo.getResults(quizId: shortCode);
     result.fold(
       (fail) {
-        log(fail.toString());
         emit(QuizFail(fail.errMessage));
       },
 
       (success) {
-        log(result.toString());
         emit(QuizResultSuccess(success));
+      },
+    );
+  }
+
+  Future<void> getResposes({required String shortCode}) async {
+    emit(QuizResultLoading());
+    final result = await quizRepo.getResponses(shortCode: shortCode);
+    result.fold(
+      (fail) {
+        emit(QuizFail(fail.errMessage));
+      },
+
+      (success) {
+        emit(ShowResponseSuccess(success));
       },
     );
   }
