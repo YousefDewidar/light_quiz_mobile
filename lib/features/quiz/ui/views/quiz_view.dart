@@ -7,7 +7,9 @@ import 'package:light_quiz/features/quiz/ui/cubits/quiz_cubit.dart';
 import 'package:light_quiz/features/quiz/data/models/quiz.dart';
 import 'package:light_quiz/core/widgets/custom_button.dart';
 import 'package:light_quiz/features/quiz/ui/cubits/quiz_state.dart';
+import 'package:light_quiz/features/quiz/ui/views/widgets/blured_screen.dart';
 import 'package:light_quiz/features/quiz/ui/views/widgets/question_card.dart';
+import 'package:no_screenshot/no_screenshot.dart';
 
 class QuizView extends StatefulWidget {
   final Quiz quiz;
@@ -17,14 +19,18 @@ class QuizView extends StatefulWidget {
   State<QuizView> createState() => _QuizViewState();
 }
 
-class _QuizViewState extends State<QuizView> {
+class _QuizViewState extends State<QuizView> with WidgetsBindingObserver {
   late Timer _timer;
   int _remainingSeconds = 0;
   late List<Answers> answers;
+  bool _isBlurred = false;
+  final _noScreenshot = NoScreenshot.instance;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    disableScreenshot();
     answers =
         widget.quiz.questions
             .map((q) => Answers(questionId: q.questionId))
@@ -32,6 +38,36 @@ class _QuizViewState extends State<QuizView> {
 
     _remainingSeconds = widget.quiz.durationMinutes * 60;
     _startTimer();
+  }
+
+  void disableScreenshot() async {
+    await _noScreenshot.screenshotOff();
+  }
+
+  void enableScreenshot() async {
+    await _noScreenshot.screenshotOn();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    enableScreenshot();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.paused) {
+      setState(() {
+        _isBlurred = true;
+      });
+    } else if (state == AppLifecycleState.resumed) {
+      setState(() {
+        _isBlurred = false;
+      });
+    }
   }
 
   void _startTimer() {
@@ -61,12 +97,6 @@ class _QuizViewState extends State<QuizView> {
   }
 
   @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     double percentage =
         1 - (_remainingSeconds / (widget.quiz.durationMinutes * 60));
@@ -74,54 +104,60 @@ class _QuizViewState extends State<QuizView> {
 
     return Scaffold(
       appBar: quizAppBar(percentage, isWarning, context),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // List of questions
-            Expanded(
-              child: ListView.builder(
-                itemCount: widget.quiz.questions.length,
-                itemBuilder: (context, index) {
-                  final question = widget.quiz.questions[index];
-                  return QuestionCard(
-                    answers: answers,
-                    qIndex: index,
-                    question: question,
-                  );
-                },
-              ),
-            ),
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // List of questions
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: widget.quiz.questions.length,
+                    itemBuilder: (context, index) {
+                      final question = widget.quiz.questions[index];
+                      return QuestionCard(
+                        answers: answers,
+                        qIndex: index,
+                        question: question,
+                      );
+                    },
+                  ),
+                ),
 
-            BlocConsumer<QuizCubit, QuizState>(
-              listener: (context, state) async {
-                if (state is QuizSubmitSuccess) {
-                  _timer.cancel();
-                  showNotification(
-                    context,
-                    'Quiz submitted successfully 🎉\nCheck your result',
-                    NotiType.success,
-                  );
-                  Navigator.pop(context);
-                } else if (state is QuizSubmitFailure) {
-                  showNotification(context, state.message, NotiType.error);
-                }
-              },
-              builder: (context, state) {
-                return CustomButton(
-                  onPressed: _submitQuiz,
-                  isLoading: state is QuizSubmitLoading,
-                  title: 'Submit',
-                  icon:
-                      state is QuizSubmitLoading
-                          ? null
-                          : Icon(Icons.send, color: Colors.white),
-                );
-              },
+                BlocConsumer<QuizCubit, QuizState>(
+                  listener: (context, state) async {
+                    if (state is QuizSubmitSuccess) {
+                      _timer.cancel();
+                      showNotification(
+                        context,
+                        'Quiz submitted successfully 🎉\nCheck your result',
+                        NotiType.success,
+                      );
+                      Navigator.pop(context);
+                    } else if (state is QuizSubmitFailure) {
+                      showNotification(context, state.message, NotiType.error);
+                    }
+                  },
+                  builder: (context, state) {
+                    return CustomButton(
+                      onPressed: _submitQuiz,
+                      isLoading: state is QuizSubmitLoading,
+                      title: 'Submit',
+                      icon:
+                          state is QuizSubmitLoading
+                              ? null
+                              : Icon(Icons.send, color: Colors.white),
+                    );
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+
+          if (_isBlurred) BluredScreen(),
+        ],
       ),
     );
   }

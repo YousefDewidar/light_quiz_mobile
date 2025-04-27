@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:light_quiz/core/widgets/custom_button.dart';
 import 'package:light_quiz/features/quiz/data/models/result.dart';
-import 'package:light_quiz/features/quiz/ui/cubits/quiz_cubit.dart';
-import 'package:light_quiz/features/quiz/ui/cubits/quiz_state.dart';
-import 'package:light_quiz/features/quiz/ui/views/show_response_view.dart';
+import 'package:light_quiz/features/quiz/ui/cubits/response_cubit.dart';
 
 class ResultCard extends StatelessWidget {
   const ResultCard({super.key, required this.isPassed, required this.result});
@@ -79,28 +78,17 @@ class ResultCard extends StatelessWidget {
           ),
 
           SizedBox(height: 16),
-          BlocListener<QuizCubit, QuizState>(
-            listener: (context, state) {
-              if (state is ShowResponseSuccess) {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => ShowResponseView(quiz: state.results),
-                  ),
-                );
-              }
+
+          CustomButton(
+            title: "View Answers",
+            color: Colors.blueAccent,
+            onPressed: () async {
+              // log(result.quizShortCode);
+              await context.read<ResponseCubit>().getResposes(
+                context,
+                shortCode: result.quizShortCode,
+              );
             },
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                backgroundColor: Colors.blueAccent,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text("Show Responses"),
-            ),
           ),
         ],
       ),

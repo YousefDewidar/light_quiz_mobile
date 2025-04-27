@@ -2,6 +2,8 @@ class Result {
   String studentId;
   String quizId;
   String quizTitle;
+  String quizShortCode;
+
   int grade;
   int possiblePoints;
   int correctQuestions;
@@ -10,6 +12,7 @@ class Result {
   Result({
     required this.studentId,
     required this.quizId,
+    required this.quizShortCode,
     required this.quizTitle,
     required this.grade,
     required this.possiblePoints,
@@ -26,8 +29,7 @@ class Result {
       possiblePoints: map['possiblePoints'] as int,
       correctQuestions: map['correctQuestions'] as int,
       totalQuestions: map['totalQuestions'] as int,
+      quizShortCode: map['quizShortCode'] as String,
     );
   }
-
-
 }

@@ -19,6 +19,15 @@ class ShowResponseView extends StatelessWidget {
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.popUntil(context, (route) => route.isFirst);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Theme.of(context).textTheme.bodySmall!.color,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(

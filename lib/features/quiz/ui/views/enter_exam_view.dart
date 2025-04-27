@@ -20,6 +20,11 @@ class EnterExamView extends StatefulWidget {
 class _EnterExamViewState extends State<EnterExamView> {
   final _controller = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   void _submitCode() {
     final code = _controller.text.trim();
     if (code.isNotEmpty) {

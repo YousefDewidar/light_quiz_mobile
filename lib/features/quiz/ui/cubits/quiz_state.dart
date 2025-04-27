@@ -1,4 +1,3 @@
-import 'package:light_quiz/features/quiz/data/models/correct_quiz_model.dart';
 import 'package:light_quiz/features/quiz/data/models/quiz.dart';
 import 'package:light_quiz/features/quiz/data/models/quiz_meta_data.dart';
 import 'package:light_quiz/features/quiz/data/models/result.dart';
@@ -42,10 +41,7 @@ class QuizResultSuccess extends QuizState {
   QuizResultSuccess(this.result);
 }
 
-class ShowResponseSuccess extends QuizState {
-  final CorrectedQuizModel results;
-  ShowResponseSuccess(this.results);
-}
+
 
 class QuizResultListLoading extends QuizState {}
 

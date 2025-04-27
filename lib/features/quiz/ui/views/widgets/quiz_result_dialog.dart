@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:light_quiz/features/quiz/data/models/result.dart';
-import 'package:light_quiz/features/quiz/ui/cubits/quiz_cubit.dart';
-import 'package:light_quiz/features/quiz/ui/cubits/quiz_state.dart';
-import 'package:light_quiz/features/quiz/ui/views/show_response_view.dart';
+import 'package:light_quiz/features/quiz/ui/cubits/response_cubit.dart';
+import 'package:light_quiz/features/quiz/ui/cubits/response_state.dart';
 
 class QuizResultDialog extends StatelessWidget {
   final Result result;
@@ -79,21 +78,12 @@ class QuizResultDialog extends StatelessWidget {
             // Button to view answers
             SizedBox(
               width: double.infinity,
-              child: BlocListener<QuizCubit, QuizState>(
-                listener: (context, state) {
-                  if (state is ShowResponseSuccess) {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder:
-                            (context) => ShowResponseView(quiz: state.results),
-                      ),
-                    );
-                  }
-                },
+              child: BlocListener<ResponseCubit, ResponseState>(
+                listener: (context, state) {},
                 child: ElevatedButton(
                   onPressed: () async {
-                    await context.read<QuizCubit>().getResposes(
+                    await context.read<ResponseCubit>().getResposes(
+                      context,
                       shortCode: shortCode,
                     );
                   },

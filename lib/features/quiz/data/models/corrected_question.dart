@@ -4,7 +4,8 @@ class CorrectedQuestion {
   final String text;
   final int points;
   final String? studentAnswer;
-  final String? studentOption; // like "a", "b"
+  final String? studentOption;
+  final String? correctOption;
   final bool isCorrect;
   final String? explanation;
   final List<CorrectedOption>? options;
@@ -17,6 +18,7 @@ class CorrectedQuestion {
     required this.isCorrect,
     this.explanation,
     this.options,
+    this.correctOption,
   });
 
   factory CorrectedQuestion.fromJson(Map<String, dynamic> json) {
@@ -27,6 +29,7 @@ class CorrectedQuestion {
       studentOption: json['studentAnsweredOption'],
       isCorrect: json['isCorrect'],
       explanation: json['feedbackMessage'],
+      correctOption: json['correctOption'],
       options:
           json['options'] != null
               ? (json['options'] as List)
@@ -35,8 +38,6 @@ class CorrectedQuestion {
               : null,
     );
   }
-
-
 
   int get typeId =>
       options == null || options!.isEmpty

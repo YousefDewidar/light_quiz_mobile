@@ -4,11 +4,29 @@ import 'package:light_quiz/core/helper/di.dart';
 import 'package:light_quiz/features/quiz/data/repo/quiz_repo.dart';
 import 'package:light_quiz/features/quiz/ui/cubits/quiz_cubit.dart';
 import 'package:light_quiz/features/quiz/ui/cubits/quiz_state.dart';
+import 'package:light_quiz/features/quiz/ui/cubits/response_cubit.dart';
+import 'package:light_quiz/features/quiz/ui/cubits/response_state.dart';
 import 'package:light_quiz/features/quiz/ui/views/widgets/result_card.dart';
 import 'package:lottie/lottie.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class ResultsView extends StatelessWidget {
   const ResultsView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ResponseCubit, ResponseState>(
+      builder: (context, state) {
+        return ModalProgressHUD(
+          inAsyncCall: state is ResponseLoading,
+          child: ResultViewBody());
+      },
+    );
+  }
+}
+
+class ResultViewBody extends StatelessWidget {
+  const ResultViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +41,6 @@ class ResultsView extends StatelessWidget {
             return Column(
               children: [
                 SizedBox(height: 10),
-
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 20),
                   color: Theme.of(context).textTheme.bodyMedium!.color,

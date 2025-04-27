@@ -83,7 +83,7 @@ class CorrectedQuestionCard extends StatelessWidget {
                   return Container(
                     decoration: _mcqDecoration(
                       isSelected: opt.optionLetter == question.studentOption,
-                      isCorrect: question.isCorrect,
+                      isCorrect: opt.optionLetter == question.correctOption,
                     ),
                     margin: const EdgeInsets.only(bottom: 8),
                     child: RadioListTile<String>(
@@ -114,7 +114,7 @@ class CorrectedQuestionCard extends StatelessWidget {
               ),
 
             // الملاحظات إن وجدت
-            if (question.explanation != null)
+            if (question.explanation != null && !isMcq)
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -164,6 +164,9 @@ class CorrectedQuestionCard extends StatelessWidget {
     } else if (!isCorrect && isSelected) {
       borderColor = Colors.red;
       bgColor = Colors.red.withOpacity(0.1);
+    } else if (isCorrect) {
+      borderColor = Colors.green;
+      bgColor = const Color(0xFF72EEA6).withOpacity(0.2);
     }
 
     return BoxDecoration(

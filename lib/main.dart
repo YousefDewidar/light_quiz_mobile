@@ -14,6 +14,7 @@ import 'package:light_quiz/features/groups/data/repo/group_repo.dart';
 import 'package:light_quiz/features/groups/ui/managers/group_cubit.dart';
 import 'package:light_quiz/features/quiz/data/repo/quiz_repo.dart';
 import 'package:light_quiz/features/quiz/ui/cubits/quiz_cubit.dart';
+import 'package:light_quiz/features/quiz/ui/cubits/response_cubit.dart';
 import 'package:light_quiz/features/splash/ui/splash_view.dart';
 import 'package:light_quiz/firebase_options.dart';
 
@@ -45,6 +46,7 @@ class StudentQuizApp extends StatelessWidget {
           create:
               (context) => GroupCubit(getIt.get<GroupRepo>())..getAllGroups(),
         ),
+        BlocProvider(create: (context) => ResponseCubit(getIt.get<QuizRepo>())),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {

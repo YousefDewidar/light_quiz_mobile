@@ -55,19 +55,6 @@ class QuizCubit extends Cubit<QuizState> {
     );
   }
 
-  Future<void> getResposes({required String shortCode}) async {
-    emit(QuizResultLoading());
-    final result = await quizRepo.getResponses(shortCode: shortCode);
-    result.fold(
-      (fail) {
-        emit(QuizFail(fail.errMessage));
-      },
-
-      (success) {
-        emit(ShowResponseSuccess(success));
-      },
-    );
-  }
 
   Future<void> getResultsList() async {
     emit(QuizResultListLoading());
