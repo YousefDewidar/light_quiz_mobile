@@ -19,6 +19,7 @@ import 'package:light_quiz/features/splash/ui/splash_view.dart';
 import 'package:light_quiz/firebase_options.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

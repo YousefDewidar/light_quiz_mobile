@@ -8,6 +8,7 @@ class CorrectedQuestion {
   final String? correctOption;
   final bool isCorrect;
   final String? explanation;
+  final String? imageUrl;
   final List<CorrectedOption>? options;
 
   CorrectedQuestion({
@@ -19,6 +20,7 @@ class CorrectedQuestion {
     this.explanation,
     this.options,
     this.correctOption,
+    this.imageUrl,
   });
 
   factory CorrectedQuestion.fromJson(Map<String, dynamic> json) {
@@ -30,6 +32,7 @@ class CorrectedQuestion {
       isCorrect: json['isCorrect'],
       explanation: json['feedbackMessage'],
       correctOption: json['correctOption'],
+      imageUrl: json['imageUrl'],
       options:
           json['options'] != null
               ? (json['options'] as List)

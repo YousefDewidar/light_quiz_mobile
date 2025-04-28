@@ -26,6 +26,7 @@ dependencies:
   awesome_notifications:
   flutter_secure_storage: ^9.2.4
   # flutter_windowmanager:
+
   flutter:
     sdk: flutter
   no_screenshot: ^0.3.1

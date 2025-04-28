@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:light_quiz/core/utils/app_colors.dart';
 import 'package:light_quiz/features/quiz/data/models/question.dart';
@@ -50,7 +51,32 @@ class QuestionCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 12),
+            if (question.imageUrl != null)
+              Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: CachedNetworkImage(
+                    imageUrl: question.imageUrl!,
+                    height: 290,
+                    fit: BoxFit.fill,
+                    errorListener: (value) {
+                      return;
+                    },
+                    errorWidget:
+                        (context, url, error) =>
+                            Center(child: const Icon(Icons.error)),
+                    placeholder:
+                        (context, url) => Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.orange,
+                          ),
+                        ),
+                  ),
+                ),
+              ),
+            const SizedBox(height: 12),
+
             if (question.typeId == 1 || question.typeId == 2)
               McqOptionsListView(
                 question: question,

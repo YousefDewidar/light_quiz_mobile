@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:light_quiz/core/utils/app_colors.dart';
 import 'package:light_quiz/features/quiz/data/models/corrected_question.dart';
@@ -70,6 +71,24 @@ class CorrectedQuestionCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
+            if (question.imageUrl != null)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: CachedNetworkImage(
+                  imageUrl: question.imageUrl!,
+                  fit: BoxFit.fill,
+                  errorListener: (value) {
+                    return;
+                  },
+                  errorWidget:
+                      (context, url, error) =>
+                          Center(child: const Icon(Icons.error)),
+                  placeholder:
+                      (context, url) => Center(
+                        child: CircularProgressIndicator(color: Colors.orange),
+                      ),
+                ),
+              ),
 
             // الأسئلة MCQ
             if (isMcq && question.options != null)

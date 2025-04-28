@@ -8,6 +8,7 @@ class Questions {
   final String questionId;
   final String quizId;
   final String text;
+  final String? imageUrl;
   final int typeId;
   final int? points;
   final List<Option>? options;
@@ -18,6 +19,7 @@ class Questions {
     required this.text,
     required this.typeId,
     this.points,
+    this.imageUrl,
     this.options,
   });
 
@@ -26,6 +28,7 @@ class Questions {
       questionId: map['questionId'] as String,
       quizId: map['quizId'] as String,
       text: map['text'] as String,
+      imageUrl: map['imageUrl'] as String,
       typeId: map['typeId'] as int,
       points: map['points'] != null ? map['points'] as int : null,
       options:
