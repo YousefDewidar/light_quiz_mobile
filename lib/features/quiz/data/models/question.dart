@@ -28,7 +28,7 @@ class Questions {
       questionId: map['questionId'] as String,
       quizId: map['quizId'] as String,
       text: map['text'] as String,
-      imageUrl: map['imageUrl'] as String,
+      imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : null,
       typeId: map['typeId'] as int,
       points: map['points'] != null ? map['points'] as int : null,
       options:

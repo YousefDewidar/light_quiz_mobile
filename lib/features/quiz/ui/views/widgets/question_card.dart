@@ -58,7 +58,7 @@ class QuestionCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   child: CachedNetworkImage(
                     imageUrl: question.imageUrl!,
-                    height: 290,
+                    height: 240,
                     fit: BoxFit.fill,
                     errorListener: (value) {
                       return;

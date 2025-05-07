@@ -2,7 +2,7 @@ import 'package:light_quiz/features/quiz/data/models/correct_option.dart';
 
 class CorrectedQuestion {
   final String text;
-  final int points;
+  final num points;
   final String? studentAnswer;
   final String? studentOption;
   final String? correctOption;
@@ -23,29 +23,41 @@ class CorrectedQuestion {
     this.imageUrl,
   });
 
-  factory CorrectedQuestion.fromJson(Map<String, dynamic> json) {
-    return CorrectedQuestion(
-      text: json['questionText'],
-      points: json['points'],
-      studentAnswer: json['studentAnsweredText'],
-      studentOption: json['studentAnsweredOption'],
-      isCorrect: json['isCorrect'],
-      explanation: json['feedbackMessage'],
-      correctOption: json['correctOption'],
-      imageUrl: json['imageUrl'],
-      options:
-          json['options'] != null
-              ? (json['options'] as List)
-                  .map((e) => CorrectedOption.fromJson(e))
-                  .toList()
-              : null,
-    );
-  }
-
   int get typeId =>
       options == null || options!.isEmpty
           ? 3 // essay
           : options!.length == 2
           ? 2 // true/false
           : 1; // mcq
+
+  factory CorrectedQuestion.fromMap(Map<String, dynamic> map) {
+    return CorrectedQuestion(
+      text: map['questionText'] as String,
+      points: map['points'] as num,
+      studentOption:
+          map['studentAnsweredOption'] != null
+              ? map['studentAnsweredOption'] as String
+              : null,
+      studentAnswer:
+          map['studentAnsweredText'] != null
+              ? map['studentAnsweredText'] as String
+              : null,
+      correctOption:
+          map['correctOption'] != null ? map['correctOption'] as String : null,
+      isCorrect: map['isCorrect'] as bool,
+      explanation:
+          map['feedbackMessage'] != null
+              ? map['feedbackMessage'] as String
+              : null,
+      imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : null,
+      options:
+          map['options'] != null
+              ? List<CorrectedOption>.from(
+                (map['options'] as List).map<CorrectedOption>(
+                  (x) => CorrectedOption.fromJson(x as Map<String, dynamic>),
+                ),
+              )
+              : null,
+    );
+  }
 }

@@ -58,25 +58,38 @@ class _QuizViewState extends State<QuizView> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
+    if (!mounted) return;
+
     if (state == AppLifecycleState.inactive ||
         state == AppLifecycleState.paused) {
-      setState(() {
-        _isBlurred = true;
-      });
+      if (mounted) {
+        setState(() {
+          _isBlurred = true;
+        });
+      }
     } else if (state == AppLifecycleState.resumed) {
-      setState(() {
-        _isBlurred = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isBlurred = false;
+        });
+      }
     }
   }
 
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
+
       if (_remainingSeconds == 0) {
         timer.cancel();
         _submitQuiz();
       } else {
-        setState(() => _remainingSeconds--);
+        if (mounted) {
+          setState(() => _remainingSeconds--);
+        }
       }
     });
   }

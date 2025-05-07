@@ -31,7 +31,6 @@ class CustomThemeData {
         bodyLarge: TextStyle(color: Colors.grey[700]),
         bodyMedium: TextStyle(color: Color.fromARGB(255, 245, 249, 247)),
         titleLarge: TextStyle(color: Colors.white),
-
       ),
     );
   }

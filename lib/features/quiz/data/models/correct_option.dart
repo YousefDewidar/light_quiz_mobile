@@ -1,3 +1,4 @@
+
 class CorrectedOption {
   final String id;
   final String text;
@@ -19,5 +20,4 @@ class CorrectedOption {
 
   static CorrectedOption empty() =>
       CorrectedOption(id: '', text: '', optionLetter: '');
-
 }

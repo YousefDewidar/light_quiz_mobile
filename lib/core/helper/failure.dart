@@ -60,7 +60,8 @@ class ServerFailure extends Failure {
       // }
     } else if (response.statusCode == 500) {
       return ServerFailure(
-        errMessage: 'The is a problem in server, please try later',
+        errMessage:
+            'There is a problem with the server, please try again later',
       );
     } else if (response.statusCode == 404) {
       return ServerFailure(errMessage: 'The request not found');

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:light_quiz/core/helper/api_service.dart';
@@ -110,6 +112,8 @@ class QuizRepoImpl implements QuizRepo {
         }
         return Left(ServerFailure.fromDioError(e));
       }
+
+      log(e.toString());
 
       return Left(ServerFailure(errMessage: "There is an error"));
     }

@@ -27,7 +27,7 @@ class CorrectedQuizModel {
     required this.questions,
   });
 
-  factory CorrectedQuizModel.fromJson(Map<String, dynamic> json) {
+  factory CorrectedQuizModel.fromJson( json) {
     return CorrectedQuizModel(
       quizId: json['quizId'],
       shortCode: json['shortCode'],
@@ -41,7 +41,7 @@ class CorrectedQuizModel {
       gradingDate: DateTime.parse(json['gradingDate']),
       questions:
           (json['questions'] as List)
-              .map((e) => CorrectedQuestion.fromJson(e))
+              .map((e) => CorrectedQuestion.fromMap(e))
               .toList(),
     );
   }

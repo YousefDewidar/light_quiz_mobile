@@ -72,21 +72,26 @@ class CorrectedQuestionCard extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             if (question.imageUrl != null)
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: CachedNetworkImage(
-                  imageUrl: question.imageUrl!,
-                  fit: BoxFit.fill,
-                  errorListener: (value) {
-                    return;
-                  },
-                  errorWidget:
-                      (context, url, error) =>
-                          Center(child: const Icon(Icons.error)),
-                  placeholder:
-                      (context, url) => Center(
-                        child: CircularProgressIndicator(color: Colors.orange),
-                      ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: CachedNetworkImage(
+                    imageUrl: question.imageUrl!,
+                    fit: BoxFit.fill,
+                    errorListener: (value) {
+                      return;
+                    },
+                    errorWidget:
+                        (context, url, error) =>
+                            Center(child: const Icon(Icons.error)),
+                    placeholder:
+                        (context, url) => Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.orange,
+                          ),
+                        ),
+                  ),
                 ),
               ),
 
