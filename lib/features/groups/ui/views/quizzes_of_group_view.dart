@@ -30,7 +30,7 @@ class QuizzesOfGroupView extends StatelessWidget {
           backgroundColor: Colors.transparent,
           leading: IconButton(
             onPressed: () {
-              Navigator.popUntil(context, (route) => route.isFirst);
+              Navigator.pop(context);
             },
             icon: Icon(
               Icons.arrow_back_ios_new_rounded,
@@ -55,6 +55,10 @@ class QuizzesOfGroupView extends StatelessWidget {
                   ),
                 );
               }
+              state.quizzes.sort(
+                (as, b) => -(as.startsAt).compareTo((b.startsAt)),
+              );
+
               return ListView.builder(
                 itemCount: state.quizzes.length,
                 itemBuilder: (context, index) {

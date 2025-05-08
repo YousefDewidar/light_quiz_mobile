@@ -21,7 +21,7 @@ class ShowResponseView extends StatelessWidget {
         backgroundColor: Colors.transparent,
         leading: IconButton(
           onPressed: () {
-            Navigator.popUntil(context, (route) => route.isFirst);
+            Navigator.pop(context);
           },
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,

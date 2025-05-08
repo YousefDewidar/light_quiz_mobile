@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:light_quiz/core/utils/app_colors.dart';
@@ -129,7 +127,6 @@ class StartQuizFromGroup extends StatelessWidget {
                       return CustomButton(
                         title: "Start Quiz",
                         onPressed: () async {
-                          log(metaData.quizId);
                           await context.read<QuizCubit>().loadQuiz(
                             examCode: metaData.quizId,
                           );

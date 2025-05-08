@@ -34,7 +34,10 @@ class CustomButton extends StatelessWidget {
                 : Text(
                   title,
                   textAlign: TextAlign.end,
-                  style: TextStyles.semiBold16.copyWith(color: Colors.white),
+                  style: TextStyles.semiBold16.copyWith(
+                    color: Colors.white,
+                    fontSize: 15,
+                  ),
                 ),
         onPressed: onPressed,
         style: ButtonStyle(
