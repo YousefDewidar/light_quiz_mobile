@@ -55,7 +55,6 @@ class QuizCubit extends Cubit<QuizState> {
     );
   }
 
-
   Future<void> getResultsList() async {
     emit(QuizResultListLoading());
     final result = await quizRepo.getAllResults();

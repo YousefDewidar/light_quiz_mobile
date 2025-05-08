@@ -59,6 +59,7 @@ class QuizRepoImpl implements QuizRepo {
       final res = await apiService.postWithToken("/api/quiz/start/$quizId", {});
       return Right(Quiz.fromJson(res.data as Map<String, dynamic>));
     } catch (e) {
+      log("message ${e.toString()}");
       if (e is DioException) {
         return Left(ServerFailure.fromDioError(e));
       }

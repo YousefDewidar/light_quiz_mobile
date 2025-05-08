@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:light_quiz/core/helper/api_service.dart';
 import 'package:light_quiz/core/helper/failure.dart';
 import 'package:light_quiz/features/groups/data/models/group_model.dart';
+import 'package:light_quiz/features/groups/data/models/quiz_group_metadata.dart';
 import 'package:light_quiz/features/groups/data/repo/group_repo.dart';
 
 class GroupRepoImpl implements GroupRepo {
@@ -46,6 +47,27 @@ class GroupRepoImpl implements GroupRepo {
     try {
       await apiService.postWithToken("/api/group/leave/$shortCode", {});
       return Right(null);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<QuizGroupMetaData>>> getQuizesOfGroup({
+    required String shortCode,
+  }) async {
+    try {
+      final res = await apiService.getWithToken(
+        "/api/quiz/metadata/group/$shortCode",
+      );
+      List<QuizGroupMetaData> quizzesList = [];
+      for (var group in res.data as List) {
+        quizzesList.add(QuizGroupMetaData.fromJson(group));
+      }
+      return Right(quizzesList);
     } catch (e) {
       if (e is DioException) {
         return Left(ServerFailure.fromDioError(e));

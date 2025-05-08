@@ -55,7 +55,6 @@ class StudentQuizApp extends StatelessWidget {
             navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,
             themeMode: state is ThemeChanged ? state.theme : null,
-            // themeMode: ThemeMode.dark,
             theme: CustomThemeData.lightData(),
             darkTheme: CustomThemeData.darkData(),
             home:

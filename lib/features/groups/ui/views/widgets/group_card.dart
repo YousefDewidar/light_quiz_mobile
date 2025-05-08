@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:light_quiz/core/utils/app_colors.dart';
 import 'package:light_quiz/core/widgets/custom_button.dart';
 import 'package:light_quiz/features/groups/data/models/group_model.dart';
+import 'package:light_quiz/features/groups/ui/views/quizzes_of_group_view.dart';
 import 'package:light_quiz/features/groups/ui/views/widgets/group_members_bottom_sheet.dart';
 import 'package:light_quiz/features/groups/ui/views/widgets/leave_group_dailog.dart';
 
@@ -72,6 +73,18 @@ class GroupCard extends StatelessWidget {
                   ],
                 ),
               ),
+
+              IconButton(
+                icon: Icon(Icons.logout, color: Colors.redAccent),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return LeaveGroupDialog(group: group);
+                    },
+                  );
+                },
+              ),
             ],
           ),
           SizedBox(height: 10),
@@ -79,20 +92,6 @@ class GroupCard extends StatelessWidget {
           Row(
             spacing: 15,
             children: [
-              Expanded(
-                child: CustomButton(
-                  title: "Leave Group",
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return LeaveGroupDialog(group: group);
-                      },
-                    );
-                  },
-                  color: Colors.redAccent,
-                ),
-              ),
               Expanded(
                 child: CustomButton(
                   title: "View Members",
@@ -108,6 +107,20 @@ class GroupCard extends StatelessWidget {
                   color: AppColors.primaryColor,
                 ),
               ),
+              Expanded(
+                child: CustomButton(
+                  title: "View Quizes",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => QuizzesOfGroupView(group: group),
+                      ),
+                    );
+                  },
+                  color: Colors.blueAccent,
+                ),
+              ),
             ],
           ),
         ],
@@ -115,4 +128,3 @@ class GroupCard extends StatelessWidget {
     );
   }
 }
-

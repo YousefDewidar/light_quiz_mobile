@@ -34,6 +34,7 @@ class GroupCubit extends Cubit<GroupState> {
       },
     );
   }
+
   Future<void> leaveGroup({required String shortCode}) async {
     final res = await _groupRepo.leaveGroup(shortCode: shortCode);
 
@@ -45,6 +46,19 @@ class GroupCubit extends Cubit<GroupState> {
       (groups) {
         emit(LeaveGroupSuccess());
         getAllGroups();
+      },
+    );
+  }
+
+  Future<void> getQuizesOfGroup({required String shortCode}) async {
+    emit(GetQuizesOfGroupLoading());
+    final res = await _groupRepo.getQuizesOfGroup(shortCode: shortCode);
+    res.fold(
+      (fail) {
+        emit(GetQuizesOfGroupFailure(fail.errMessage));
+      },
+      (quizzes) {
+        emit(GetQuizesOfGroupSuccess(quizzes));
       },
     );
   }

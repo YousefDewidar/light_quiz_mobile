@@ -22,18 +22,9 @@ class QuizMetaData {
     title: json['title'] as String,
     description: json['description'] as String,
     timeAllowed: json['timeAllowed'] as int,
-    startsAt: DateTime.parse(json['startsAt'] as String),
+    startsAt: DateTime.parse(json['startsAt'] as String).toLocal(),
     numberOfQuestions: json['numberOfQuestions'] as int,
     didStartQuiz: json['didStartQuiz'] as bool,
   );
 
-  Map<String, dynamic> toJson() => {
-    'quizId': quizId,
-    'title': title,
-    'description': description,
-    'timeAllowed': timeAllowed,
-    'startsAt': startsAt.toIso8601String(),
-    'numberOfQuestions': numberOfQuestions,
-    'didStartQuiz': didStartQuiz,
-  };
 }

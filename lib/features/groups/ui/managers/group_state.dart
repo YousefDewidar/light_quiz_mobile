@@ -1,4 +1,5 @@
 import 'package:light_quiz/features/groups/data/models/group_model.dart';
+import 'package:light_quiz/features/groups/data/models/quiz_group_metadata.dart';
 
 abstract class GroupState {}
 
@@ -27,3 +28,17 @@ final class JoinGroupFailure extends GroupState {
 }
 
 final class LeaveGroupSuccess extends GroupState {}
+
+final class GetQuizesOfGroupSuccess extends GroupState {
+  final List<QuizGroupMetaData> quizzes;
+
+  GetQuizesOfGroupSuccess(this.quizzes);
+}
+
+final class GetQuizesOfGroupFailure extends GroupState {
+  final String errMessage;
+
+  GetQuizesOfGroupFailure(this.errMessage);
+}
+
+final class GetQuizesOfGroupLoading extends GroupState {}
