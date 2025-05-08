@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:light_quiz/features/auth/domain/repo/auth_repo.dart'
+import 'package:light_quiz/features/auth/data/repo/auth_repo.dart'
     show AuthRepo;
 import 'package:light_quiz/features/auth/ui/managers/signup/signup_state.dart';
 

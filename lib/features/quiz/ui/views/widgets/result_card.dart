@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:light_quiz/core/widgets/custom_button.dart';
 import 'package:light_quiz/features/quiz/data/models/result.dart';
-import 'package:light_quiz/features/quiz/ui/cubits/response_cubit.dart';
+import 'package:light_quiz/features/quiz/ui/managers/response_cubit.dart';
 
 class ResultCard extends StatelessWidget {
   const ResultCard({super.key, required this.isPassed, required this.result});
@@ -80,6 +80,7 @@ class ResultCard extends StatelessWidget {
           SizedBox(height: 16),
 
           CustomButton(
+            height: 40,
             title: "View Answers",
             color: Colors.blueAccent,
             onPressed: () async {

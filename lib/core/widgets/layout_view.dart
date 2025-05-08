@@ -34,8 +34,11 @@ class _LayoutViewState extends State<LayoutView> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.transparent,
+      value: SystemUiOverlayStyle(
+        systemNavigationBarColor:
+            Theme.of(context).brightness == Brightness.light
+                ? Colors.white
+                : Colors.black,
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(

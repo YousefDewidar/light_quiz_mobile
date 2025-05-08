@@ -5,8 +5,8 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:light_quiz/core/helper/api_service.dart';
 import 'package:light_quiz/core/helper/di.dart';
 import 'package:light_quiz/core/helper/failure.dart';
-import 'package:light_quiz/features/auth/domain/repo/auth_repo.dart';
-import 'package:light_quiz/features/auth/model/user_model.dart';
+import 'package:light_quiz/features/auth/data/repo/auth_repo.dart';
+import 'package:light_quiz/features/auth/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepoImpl implements AuthRepo {

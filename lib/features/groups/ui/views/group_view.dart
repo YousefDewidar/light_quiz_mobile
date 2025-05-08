@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:light_quiz/core/utils/app_colors.dart';
@@ -75,6 +73,7 @@ class GroupsView extends StatelessWidget {
                   ),
                 );
               } else if (state is GroupSuccess) {
+                
                 final groups = state.groups;
                 return Expanded(
                   child: ListView.builder(
@@ -89,7 +88,6 @@ class GroupsView extends StatelessWidget {
               } else if (state is GroupFail) {
                 return Center(child: Text(state.errMessage));
               } else {
-                log(state.toString());
                 return Center(child: Text("data"));
               }
             },

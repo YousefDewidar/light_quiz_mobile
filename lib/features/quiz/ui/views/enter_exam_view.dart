@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:light_quiz/core/widgets/in_app_notification.dart';
-import 'package:light_quiz/features/quiz/ui/cubits/quiz_cubit.dart';
-import 'package:light_quiz/features/quiz/ui/cubits/quiz_state.dart';
+import 'package:light_quiz/features/quiz/ui/managers/quiz_cubit.dart';
+import 'package:light_quiz/features/quiz/ui/managers/quiz_state.dart';
 import 'package:light_quiz/core/widgets/custom_button.dart';
 import 'package:light_quiz/core/widgets/custom_text_field.dart';
 import 'package:light_quiz/features/quiz/ui/views/quiz_view.dart';

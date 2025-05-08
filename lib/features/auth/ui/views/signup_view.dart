@@ -4,7 +4,7 @@ import 'package:light_quiz/core/helper/di.dart';
 import 'package:light_quiz/core/utils/app_colors.dart';
 import 'package:light_quiz/core/widgets/custom_app_bar.dart';
 import 'package:light_quiz/core/widgets/in_app_notification.dart';
-import 'package:light_quiz/features/auth/domain/repo/auth_repo.dart';
+import 'package:light_quiz/features/auth/data/repo/auth_repo.dart';
 import 'package:light_quiz/features/auth/ui/managers/signup/signup_cubit.dart';
 import 'package:light_quiz/features/auth/ui/managers/signup/signup_state.dart';
 import 'package:light_quiz/features/auth/ui/views/widgets/signup/signup_view_body.dart';

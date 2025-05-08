@@ -1,5 +1,5 @@
 import 'package:light_quiz/core/helper/di.dart';
-import 'package:light_quiz/features/auth/model/user_model.dart';
+import 'package:light_quiz/features/auth/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 UserModel? getUserData() {

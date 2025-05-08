@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:light_quiz/features/quiz/data/models/result.dart';
-import 'package:light_quiz/features/quiz/ui/cubits/response_cubit.dart';
-import 'package:light_quiz/features/quiz/ui/cubits/response_state.dart';
+import 'package:light_quiz/features/quiz/ui/managers/response_cubit.dart';
+import 'package:light_quiz/features/quiz/ui/managers/response_state.dart';
 
 class QuizResultDialog extends StatelessWidget {
   final Result result;

@@ -94,6 +94,7 @@ class GroupCard extends StatelessWidget {
             children: [
               Expanded(
                 child: CustomButton(
+                  height: 40,
                   title: "View Members",
                   onPressed: () {
                     showModalBottomSheet(
@@ -109,6 +110,7 @@ class GroupCard extends StatelessWidget {
               ),
               Expanded(
                 child: CustomButton(
+                  height: 40,
                   title: "View Quizes",
                   onPressed: () {
                     Navigator.push(

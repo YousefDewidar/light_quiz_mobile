@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:light_quiz/core/helper/failure.dart';
-import 'package:light_quiz/features/auth/domain/repo/auth_repo.dart';
+import 'package:light_quiz/features/auth/data/repo/auth_repo.dart';
 import 'package:light_quiz/features/auth/ui/managers/login/login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {

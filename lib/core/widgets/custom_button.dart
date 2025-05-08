@@ -7,6 +7,7 @@ class CustomButton extends StatelessWidget {
   final Color color;
   final Widget? icon;
   final bool isLoading;
+  final double height;
   final void Function()? onPressed;
   const CustomButton({
     super.key,
@@ -15,30 +16,34 @@ class CustomButton extends StatelessWidget {
     this.icon,
     this.color = AppColors.primaryColor,
     this.isLoading = false,
+    this.height = 50,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      icon: icon,
-      label:
-          isLoading
-              ? Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: CircularProgressIndicator(color: Colors.white),
-              )
-              : Text(
-                title,
-                textAlign: TextAlign.end,
-                style: TextStyles.semiBold16.copyWith(color: Colors.white),
-              ),
-      onPressed: onPressed,
-      style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(color),
-        fixedSize: const WidgetStatePropertyAll(Size.fromHeight(49)),
-        shape: const WidgetStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(4)),
+    return SizedBox(
+      height: height,
+      child: ElevatedButton.icon(
+        icon: icon,
+        label:
+            isLoading
+                ? Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: CircularProgressIndicator(color: Colors.white),
+                )
+                : Text(
+                  title,
+                  textAlign: TextAlign.end,
+                  style: TextStyles.semiBold16.copyWith(color: Colors.white),
+                ),
+        onPressed: onPressed,
+        style: ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll(color),
+          fixedSize: const WidgetStatePropertyAll(Size.fromHeight(49)),
+          shape: const WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+            ),
           ),
         ),
       ),

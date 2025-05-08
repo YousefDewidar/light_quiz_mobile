@@ -6,8 +6,8 @@ import 'package:light_quiz/core/utils/app_colors.dart';
 import 'package:light_quiz/core/widgets/custom_button.dart';
 import 'package:light_quiz/core/widgets/in_app_notification.dart';
 import 'package:light_quiz/features/groups/data/models/quiz_group_metadata.dart';
-import 'package:light_quiz/features/quiz/ui/cubits/quiz_cubit.dart';
-import 'package:light_quiz/features/quiz/ui/cubits/quiz_state.dart';
+import 'package:light_quiz/features/quiz/ui/managers/quiz_cubit.dart';
+import 'package:light_quiz/features/quiz/ui/managers/quiz_state.dart';
 import 'package:light_quiz/features/quiz/ui/views/quiz_view.dart';
 
 class StartQuizFromGroup extends StatelessWidget {

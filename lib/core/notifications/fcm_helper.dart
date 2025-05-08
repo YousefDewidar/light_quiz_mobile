@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:light_quiz/core/helper/di.dart';
@@ -17,6 +19,7 @@ class FcmHelper {
 
     getIt.get<SharedPreferences>().setString('fcmToken', fcmToken!);
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      log("message");
       LocalNotificationService.createNotificationGlobal(
         title: message.notification!.title!,
         body: message.notification!.body!,

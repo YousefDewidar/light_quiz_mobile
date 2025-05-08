@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:light_quiz/core/utils/app_colors.dart';
 import 'package:light_quiz/core/widgets/custom_button.dart';
 import 'package:light_quiz/features/quiz/data/models/quiz_meta_data.dart';
-import 'package:light_quiz/features/quiz/ui/cubits/quiz_cubit.dart';
-import 'package:light_quiz/features/quiz/ui/cubits/quiz_state.dart';
+import 'package:light_quiz/features/quiz/ui/managers/quiz_cubit.dart';
+import 'package:light_quiz/features/quiz/ui/managers/quiz_state.dart';
 
 class StartQuizDialog extends StatelessWidget {
   final QuizMetaData metaData;
